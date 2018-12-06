@@ -1,35 +1,47 @@
-var camera, scene, renderer;
-var geometry, material, mesh;
 
-init();
-animate();
+var particle;
 
-function init() {
+particle = (function() {
+    'use strict';
 
-	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-	camera.position.z = 1;
+    var camera, 
+    	scene,
+    	renderer,
+    	geometry,
+    	material,
+    	mesh;
 
-	scene = new THREE.Scene();
+    function init() {
+    	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+		camera.position.z = 1;
 
-	geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-	material = new THREE.MeshNormalMaterial();
+		scene = new THREE.Scene();
 
-	mesh = new THREE.Mesh( geometry, material );
-	scene.add( mesh );
+		geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+		material = new THREE.MeshNormalMaterial();
 
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.body.appendChild( renderer.domElement );
+		mesh = new THREE.Mesh( geometry, material );
+		scene.add( mesh );
 
-}
+		renderer = new THREE.WebGLRenderer( { antialias: true } );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+        animate();
+    }
 
-function animate() {
+    function animate() {
+		requestAnimationFrame( animate );
+		mesh.rotation.x += 0.01;
+		mesh.rotation.y += 0.02;
+		renderer.render( scene, camera );
+    }
 
-	requestAnimationFrame( animate );
 
-	mesh.rotation.x += 0.01;
-	mesh.rotation.y += 0.02;
+    return {
+        init: init,
+    };
 
-	renderer.render( scene, camera );
+}());
 
-}
+
+particle.init();
