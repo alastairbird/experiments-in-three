@@ -1,35 +1,83 @@
-var camera, scene, renderer;
-var geometry, material, mesh;
 
-init();
-animate();
+var particle;
 
-function init() {
+particle = (function() {
+    'use strict';
 
-	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-	camera.position.z = 1;
+    var camera, 
+    	scene,
+    	renderer,
+    	geometry,
+    	material,
+    	mesh,
+        width,
+        height;
 
-	scene = new THREE.Scene();
+    function init() {
+        width = window.innerWidth;
+        height = window.innerHeight;
 
-	geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-	material = new THREE.MeshNormalMaterial();
+        // New camera and position
+    	camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 10 );
+		camera.position.z = 1;
 
-	mesh = new THREE.Mesh( geometry, material );
-	scene.add( mesh );
+        // New scene
+		scene = new THREE.Scene();
 
-	renderer = new THREE.WebGLRenderer( { antialias: true } );
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.body.appendChild( renderer.domElement );
+        // Create a box geometry & material
+		geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+		material = new THREE.MeshNormalMaterial();
 
-}
+        // Apply the material to the box and add it to the scene
+		mesh = new THREE.Mesh( geometry, material );
+		scene.add( mesh );
 
-function animate() {
+        // Create a renderer and set its size
+		renderer = new THREE.WebGLRenderer( { antialias: true } );
+		renderer.setSize( width, height );
+	
+        // Add the renderer to the DOM
+    	document.body.appendChild( renderer.domElement );
 
-	requestAnimationFrame( animate );
+        // Listen to the window resize event
+        window.addEventListener('resize', onWindowResize);
 
-	mesh.rotation.x += 0.01;
-	mesh.rotation.y += 0.02;
+        // Fire animation
+        animate();
+    }
 
-	renderer.render( scene, camera );
+    function animate() {
 
-}
+        // Re-render everytime screen is refreshed
+		requestAnimationFrame( animate );
+
+        // Add some x and y rotation to the box
+		mesh.rotation.x += 0.01;
+		mesh.rotation.y += 0.02;
+
+        // Tell the renderer to add the scene and camera
+		renderer.render( scene, camera );
+        updateRendererSize();
+    }
+
+    function onWindowResize(){
+        width = window.innerWidth;
+        height = window.innerHeight;
+        updateRendererSize();
+    }
+    
+    // Change the size of the renderer and keep aspect ratio
+    function updateRendererSize(){
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    }
+      
+    return {
+        init: init,
+    };
+
+}());
+
+
+particle.init();
