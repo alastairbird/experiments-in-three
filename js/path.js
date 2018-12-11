@@ -15,6 +15,7 @@ particle = (function() {
         numberOfBoxes,
         width,
         time,
+        circleRadius,
         height;
 
     function init() {
@@ -22,8 +23,9 @@ particle = (function() {
         width = window.innerWidth;
         height = window.innerHeight;
         arrayOfBoxes = [];
-        numberOfBoxes = 10;
+        numberOfBoxes = 100;
         time = 0;
+        circleRadius = 2;
 
         setupScene();
         createBoxes();
@@ -37,7 +39,7 @@ particle = (function() {
 
         for(var i=0; i < numberOfBoxes; i++){
             // geometry = new THREE.BoxGeometry( Math.random(0,0.3), Math.random(0,0.3), Math.random(0,0.3) );
-            geometry = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
+            geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
             arrayOfBoxes[i] = new THREE.Mesh( geometry, material );
             scene.add( arrayOfBoxes[i] );
@@ -48,7 +50,7 @@ particle = (function() {
     function setupScene() {
         // New camera and position
         camera = new THREE.PerspectiveCamera( 90, width / height, 0.01, 100 );
-        camera.position.z = 2;
+        camera.position.z = 5;
         camera.position.x = 0.5;
         camera.position.y = 0.5;
 
@@ -74,11 +76,14 @@ particle = (function() {
         time += 0.01;
 
         for(var i=0; i < arrayOfBoxes.length; i++){
-            arrayOfBoxes[i].rotation.y += 0.01 * i;
-            arrayOfBoxes[i].rotation.x += 0.01 * i;
-            arrayOfBoxes[i].rotation.z += 0.01 * i;
-            arrayOfBoxes[i].position.x = Math.cos(time) + (Math.cos(time) * i);
-            arrayOfBoxes[i].position.z = Math.sin(time) + (Math.sin(time) * i);
+            arrayOfBoxes[i].rotation.y += 0.01;
+            arrayOfBoxes[i].rotation.x += 0.01;
+            arrayOfBoxes[i].rotation.z += 0.01;
+            // arrayOfBoxes[i].position.x = Math.cos(time) + (Math.cos(time));
+            // arrayOfBoxes[i].position.z = Math.sin(time) + (Math.sin(time) * i);
+            // angle = Math.cos(i);
+            arrayOfBoxes[i].position.x = (Math.sin(time + i) * circleRadius);
+            arrayOfBoxes[i].position.y = (Math.cos(time + i) * circleRadius);
         }
 
         // Tell the renderer to add the scene and camera
