@@ -23,7 +23,7 @@ particle = (function() {
         width = window.innerWidth;
         height = window.innerHeight;
         arrayOfBoxes = [];
-        numberOfBoxes = 100;
+        numberOfBoxes = 90;
         time = 0;
         circleRadius = 2;
 
@@ -51,8 +51,8 @@ particle = (function() {
         // New camera and position
         camera = new THREE.PerspectiveCamera( 90, width / height, 0.01, 100 );
         camera.position.z = 5;
-        camera.position.x = 0.5;
-        camera.position.y = 0.5;
+        camera.position.x = 0;
+        camera.position.y = 0;
 
         // New scene
         scene = new THREE.Scene();
