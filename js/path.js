@@ -25,7 +25,7 @@ particle = (function() {
         arrayOfBoxes = [];
         numberOfBoxes = 900;
         time = 0;
-        circleRadius = 2;
+        circleRadius = 3;
 
         setupScene();
         createBoxes();
@@ -52,7 +52,7 @@ particle = (function() {
         camera = new THREE.PerspectiveCamera( 90, width / height, 0.01, 100 );
         camera.position.z = 5;
         camera.position.x = 0;
-        camera.position.y = -0.5;
+        camera.position.y = 0;
 
         // New scene
         scene = new THREE.Scene();
@@ -78,7 +78,7 @@ particle = (function() {
         for(var i=0; i < arrayOfBoxes.length; i++){
             arrayOfBoxes[i].rotation.y += 0.01;
             arrayOfBoxes[i].rotation.x += 0.01;
-            arrayOfBoxes[i].rotation.z += 0.01;
+            arrayOfBoxes[i].rotation.z += 0.04;
             // arrayOfBoxes[i].position.x = Math.cos(time) + (Math.cos(time));
             // arrayOfBoxes[i].position.z = Math.sin(time) + (Math.sin(time) * i);
             // angle = Math.cos(i);
