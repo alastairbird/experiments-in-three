@@ -16,6 +16,7 @@ particle = (function() {
         width,
         time,
         circleRadius,
+        cameraControls,
         height;
 
     function init() {
@@ -53,6 +54,7 @@ particle = (function() {
         camera.position.z = 5;
         camera.position.x = 0;
         camera.position.y = 0;
+        cameraControls = new THREE.OrbitControls( camera );
 
         // New scene
         scene = new THREE.Scene();
@@ -78,15 +80,16 @@ particle = (function() {
         for(var i=0; i < arrayOfBoxes.length; i++){
             arrayOfBoxes[i].rotation.y += 0.01;
             arrayOfBoxes[i].rotation.x += 0.01;
-            arrayOfBoxes[i].rotation.z += 0.04;
+            arrayOfBoxes[i].rotation.z += 0.05;
             // arrayOfBoxes[i].position.x = Math.cos(time) + (Math.cos(time));
             // arrayOfBoxes[i].position.z = Math.sin(time) + (Math.sin(time) * i);
-            // angle = Math.cos(i);
+            // angle = Math.cos(i)
             arrayOfBoxes[i].position.x = (Math.sin(time + i) * circleRadius);
             arrayOfBoxes[i].position.y = (Math.cos(time + i) * circleRadius);
         }
 
         // Tell the renderer to add the scene and camera
+        cameraControls.update();
         renderer.render( scene, camera );
         updateRendererSize();
     }
