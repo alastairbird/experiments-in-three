@@ -24,7 +24,7 @@ particle = (function() {
         width = window.innerWidth;
         height = window.innerHeight;
         arrayOfBoxes = [];
-        numberOfBoxes = 30;
+        numberOfBoxes = 700;
         time = 0;
         circleRadius = 3;
 
@@ -40,7 +40,7 @@ particle = (function() {
 
         for(var i=0; i < numberOfBoxes; i++){
             // geometry = new THREE.BoxGeometry( Math.random(0,0.3), Math.random(0,0.3), Math.random(0,0.3) );
-            geometry = new THREE.TetrahedronGeometry( 2, 4);
+            geometry = new THREE.ConeBufferGeometry( Math.random(1,5), Math.random(1,5), Math.random(1,5) );
 
             arrayOfBoxes[i] = new THREE.Mesh( geometry, material );
             scene.add( arrayOfBoxes[i] );
@@ -78,9 +78,10 @@ particle = (function() {
         time += 0.01;
 
         for(var i=0; i < arrayOfBoxes.length; i++){
-            // arrayOfBoxes[i].rotation.y += 0.01;
+            arrayOfBoxes[i].rotation.y += 0.03;
             arrayOfBoxes[i].rotation.x = Math.cos(i * 3);
-            arrayOfBoxes[i].rotation.z = Math.sin(i * 2);
+            arrayOfBoxes[i].rotation.z = Math.sin(i * 5);
+            // arrayOfBoxes[i].rotation.y = Math.cos(i * 2000);
             // arrayOfBoxes[i].position.x = Math.cos(time) + (Math.cos(time));
             // arrayOfBoxes[i].position.z = Math.sin(time) + (Math.sin(time) * i);
             // angle = Math.cos(i)
