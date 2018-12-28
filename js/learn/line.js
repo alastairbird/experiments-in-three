@@ -64,6 +64,8 @@ something = (function() {
         camera.position.y = 12;
         cameraControls = new THREE.OrbitControls( camera );
 
+
+
         // New scene
         scene = new THREE.Scene();
 
@@ -86,6 +88,9 @@ something = (function() {
 
         // Increase time
         time += 0.01;
+
+        line.rotation.y += 0.01;
+
 
         // --------------------------- START STUFF
         // === Whatever code you are running
