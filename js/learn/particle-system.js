@@ -51,14 +51,14 @@ something = (function() {
         // options passed during each spawned
         options = {
             position: new THREE.Vector3(),
-            positionRandomness: .3,
+            positionRandomness: 1.2,
             velocity: new THREE.Vector3(),
-            velocityRandomness: .5,
-            color: 0xaa88ff,
-            colorRandomness: .2,
-            turbulence: .5,
-            lifetime: 2,
-            size: 5,
+            velocityRandomness: 2,
+            color: 0x80eed5,
+            colorRandomness: 1.3,
+            turbulence: .9,
+            lifetime: 10,
+            size: 4,
             sizeRandomness: 1
         };
         spawnerOptions = {
