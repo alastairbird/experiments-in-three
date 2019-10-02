@@ -9,6 +9,9 @@ something = (function() {
         renderer,
         width,
         time,
+        material,
+        geometry,
+        line,
         cameraControls,
         height;
 
@@ -17,28 +20,56 @@ something = (function() {
         width = window.innerWidth;
         height = window.innerHeight;
         time = 0;
+        material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
 
-        // createMySomething();
+
+
+
+        createMySomething();
         setupScene();
         animate();
     }
 
-    /*
+    
     function createMySomething() {
     
+        geometry = new THREE.Geometry();
+        
+        // Pyramid
+        geometry.vertices.push(new THREE.Vector3( -10, 0, 0) );
+        geometry.vertices.push(new THREE.Vector3( 0, 10, 0) );
+        geometry.vertices.push(new THREE.Vector3( 10, 0, 0) );
+        geometry.vertices.push(new THREE.Vector3( -10, 0, 0) );    
+        geometry.vertices.push(new THREE.Vector3( 0, 0, 10) );    
+        geometry.vertices.push(new THREE.Vector3( 10, 0, 0) );    
+        geometry.vertices.push(new THREE.Vector3( 0, 0, -10) );    
+        geometry.vertices.push(new THREE.Vector3( -10, 0, 0) );    
+
+        geometry.vertices.push(new THREE.Vector3( 0, 0, 10) );    
+        geometry.vertices.push(new THREE.Vector3( 0, 10, 0) );    
+        geometry.vertices.push(new THREE.Vector3( 0, 0, -10) );    
+        geometry.vertices.push(new THREE.Vector3( 0, 0, 10) );    
+
+
+        line = new THREE.Line( geometry, material );
+
     }
-    */
+    
 
     function setupScene() {
         // New camera and position
         camera = new THREE.PerspectiveCamera( 90, width / height, 0.01, 100 );
-        camera.position.z = 5;
-        camera.position.x = 0;
-        camera.position.y = 0;
+        camera.position.z = 10;
+        camera.position.x = 12;
+        camera.position.y = 12;
         cameraControls = new THREE.OrbitControls( camera );
+
+
 
         // New scene
         scene = new THREE.Scene();
+
+        scene.add ( line );
 
         // Create a renderer and set its size
         renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -57,6 +88,9 @@ something = (function() {
 
         // Increase time
         time += 0.01;
+
+        line.rotation.y += 0.01;
+
 
         // --------------------------- START STUFF
         // === Whatever code you are running
