@@ -20,7 +20,6 @@ particle = (function() {
         height;
 
     function init() {
-        // Vars
         width = window.innerWidth;
         height = window.innerHeight;
         arrayOfBoxes = [];
@@ -34,7 +33,6 @@ particle = (function() {
     }
 
     function createBoxes() {
-
         // Create a box geometry & material
         material = new THREE.MeshNormalMaterial();
 
