@@ -29,7 +29,7 @@ particle = (function() {
         width = window.innerWidth;
         height = window.innerHeight;
         arrayOfBoxes = [];
-        numberOfBoxes = 900;
+        numberOfBoxes = 500;
         time = 0;
         circleRadius = 4;
         cameraDistance = 130;
@@ -51,10 +51,10 @@ particle = (function() {
             
             if (randomDimensionsEnabled) {
                 randomDimensionX = (Math.floor(Math.random() * 2) + 0.2);
-                randomDimensionY = (Math.floor(Math.random() * 6) + 0.2);
+                randomDimensionY = (Math.floor(Math.random() * 2) + 0.2);
                 randomDimensionZ = (Math.floor(Math.random() * 2) + 0.2);
 
-                geometry = new THREE.BoxGeometry( randomDimensionX, randomDimensionY, randomDimensionZ);    
+                geometry = new THREE.ConeGeometry( randomDimensionX, randomDimensionY, randomDimensionZ);    
             } else {
                 geometry = new THREE.BoxGeometry( 1, 1, 1);    
             }
@@ -92,12 +92,13 @@ particle = (function() {
         requestAnimationFrame( animate );
 
         // Increase time
-        time += 0.07;
+        time += 0.02;
 
         for(var i=0; i < arrayOfBoxes.length; i++){
-            arrayOfBoxes[i].rotation.y = Math.sin(time) + (Math.cos(time));
-            arrayOfBoxes[i].rotation.x = Math.cos(time + i) + (Math.cos(time));
-            arrayOfBoxes[i].position.x = Math.sin(time + i) + (Math.cos(time));
+            arrayOfBoxes[i].rotation.y += 0.04;
+            arrayOfBoxes[i].rotation.x += 0.02;
+            arrayOfBoxes[i].rotation.z += 0.01;
+            // arrayOfBoxes[i].position.x = Math.cos(time) + (Math.cos(time));
             // arrayOfBoxes[i].position.z = Math.sin(time) + (Math.sin(time) * i);
             // angle = Math.cos(i)
 
